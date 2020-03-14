@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>images:</strong>
+  <%= @item.image.each do |image| %>
+    <%= image_tag image.variant(resize: "150×150")%>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
