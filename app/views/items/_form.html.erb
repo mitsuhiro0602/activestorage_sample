@@ -12,7 +12,35 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :images %>
-    <%= form.text_field :images ,multiple: true %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="images-field clearfix">
+    <div  class="field">
+      <%= form.label :images %>
+      <%= form.file_field :images, multiple: true, class: "file-input" %>
+    </div>
+    <% if item.images.attached? %>
+      <% item.images.each do |image| %>
+        <div class="image-box">
+          <%= image_tag image.variant(resize: "150x150") %>
+          <p> <%= image.filename %> </p>
+          <%= form.hidden_field :images , name: "item[images][]", value: "#{image.blob.id}", style: "display: none;", class: "item-images-input" %>
+          <%= link_to "Edit", "", class: "btn-edit" %>
+          <%= file_field "edit-image","" , class: "edit-image-file-input file-input", style: "display: none;"%>
+          <%= link_to "Delete", "", class: "btn-delete" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save"%>
   </div>
 <% end %>

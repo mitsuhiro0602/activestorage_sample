@@ -1,11 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>images:</strong>
-  <%= @item.image.each do |image| %>
-    <%= image_tag image.variant(resize: "150×150")%>
-  <% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @item.name %>
 </p>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<p>
+  <strong>Description:</strong>
+  <%= @item.description %>
+</p>
+
+<p>
+  <strong>images:</strong>
+</p>
+
+<div class= "clearfix">
+  <% if @item.images.attached? %>
+    <% @item.images.each do |image| %>
+      <div class="image-box">
+        <%= image_tag image.variant(resize: "150×150")%>
+        <p><%= image.filename %></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= link_to 'Edit', edit_item_path(@item) %> |
+  <%= link_to 'Back', items_path %>
+</div>
